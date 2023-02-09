@@ -1,0 +1,17 @@
+version: '3.1'
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: laravel_mysql
+    command: ['--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci','--default-authentication-plugin=mysql_native_password']
+    environment:
+      MYSQL_ROOT_PASSWORD: laravel
+      MYSQL_DATABASE: laravel
+    ports:
+      - 3306:3306
+    volumes:
+      - ./db-dump:/docker-entrypoint-initdb.d
+      - mysql-data:/usr/share/mysql/data
+volumes:
+  mysql-data:
+    driver: local
